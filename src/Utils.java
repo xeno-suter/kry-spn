@@ -10,6 +10,7 @@ public class Utils {
         return result;
     }
 
+    // convert byte array of m length of n bits back to chunk size (m * n)
     public static int bytesToInt(byte[] bytes) {
         int value = 0;
         for (byte b : bytes) {
@@ -19,6 +20,7 @@ public class Utils {
         return value;
     }
 
+    // convert m * n input into byte array of m length containing n bits
     public static byte[] intToBytes(int value, int length) {
         byte[] bytes = new byte[length];
         for (int i = 0; i < length; i++) {

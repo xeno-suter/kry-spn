@@ -11,9 +11,11 @@ public class SpnService {
     public byte[] encrypt(byte[] message) {
         byte[] result = Arrays.copyOf(message, message.length);
 
+        // generate round key for first round and do XOR with round key (initialer Weissschritt)
         byte[] roundKey = generateRoundKey(0);
         result = Utils.xorByteArrays(result, roundKey);
 
+        // do sBox replacement, permutation and xor with generated round key for r - 1 regular rounds
         for (int i = 1; i < rounds; i++) {
             result = SBox.applySBox(result);
             result = PermutationMatrix.permute(result);
@@ -21,6 +23,7 @@ public class SpnService {
             result = Utils.xorByteArrays(result, roundKey);
         }
 
+        // last round don't do permutation
         result = SBox.applySBox(result);
         roundKey = generateRoundKey(rounds);
         result = Utils.xorByteArrays(result, roundKey);
