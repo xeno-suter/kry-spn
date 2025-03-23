@@ -17,6 +17,7 @@ public class SBox {
         return apply(value, S_BOX);
     }
 
+    // get substitution value for block of n bits
     private static byte[] apply(byte[] value, Map<Byte, Byte> box) {
         byte[] bytes = new byte[value.length];
 

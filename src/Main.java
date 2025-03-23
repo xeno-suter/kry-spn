@@ -13,11 +13,13 @@ public class Main {
         byte[][] encrypted = new byte[splittedString.length][4];
 
         for (int i = 0; i < splittedString.length; i++) {
+            // convert m * n bit input (int value) into a byte array of m length each block containing n bits
             encrypted[i] = Utils.intToBytes(Integer.parseInt(splittedString[i], 2), 4);
         }
 
         StringBuilder builder = new StringBuilder();
         byte[][] decrypted = rctr.decrypt(encrypted);
+        // decode bits to text
         for (byte[] bytes : decrypted) {
             builder
                     .append((char) ((bytes[0] << 4) + bytes[1]))
@@ -27,6 +29,7 @@ public class Main {
         System.out.println(builder);
     }
 
+    // split encrypted input into m * n chunks
     private static String[] splitStringByLength(String str) {
         int chunkSize = 16;
         List<String> chunks = new ArrayList<>();
